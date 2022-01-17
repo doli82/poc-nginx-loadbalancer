@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web-server:
+    image: nginx:1.20.2-alpine
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - default
+    ports:
+      - 80:80
+    depends_on:
+      - app-instancia1
+      - app-instancia2
+      - app-instancia3
+  
+  app-instancia1:
+    image: doli82/docker-scale:latest
+    networks:
+      - default
+
+  app-instancia2:
+    image: doli82/docker-scale:latest
+    networks:
+      - default
+
+  app-instancia3:
+    image: doli82/docker-scale:latest
+    networks:
+      - default
